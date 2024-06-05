@@ -1,2 +1,2 @@
 # FistBorne
-Senior Project
+Senior Project: A 2-D PvP Online Platform Fighter based on the mistborn personages from the Mistborn series by Brandon Sanderson.
