@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://5yai36r8frjd"]
+[gd_scene load_steps=8 format=3 uid="uid://5yai36r8frjd"]
 
 [ext_resource type="Script" path="res://scenes/game_manager.gd" id="1_lp7i8"]
 [ext_resource type="Texture2D" uid="uid://ds5tokjnt6q8u" path="res://reused_assets/sprites/world_tileset.png" id="1_nhdpo"]
 [ext_resource type="PackedScene" uid="uid://ckat4pinvvaf8" path="res://scenes/player.tscn" id="2_msb1j"]
+[ext_resource type="FontFile" uid="uid://mewtu15l7iak" path="res://reused_assets/fonts/PixelOperator8.ttf" id="4_mdfp3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2gwk5"]
 texture = ExtResource("1_nhdpo")
@@ -396,6 +397,11 @@ texture = ExtResource("1_nhdpo")
 physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_2gwk5")
 
+[sub_resource type="LabelSettings" id="LabelSettings_rpb7h"]
+font = ExtResource("4_mdfp3")
+font_size = 13
+font_color = Color(1, 1, 1, 0.486275)
+
 [node name="game" type="Node2D"]
 
 [node name="GameManager" type="Node2D" parent="."]
@@ -412,3 +418,13 @@ position = Vector2(26, 27)
 [node name="Camera2D" type="Camera2D" parent="player"]
 position = Vector2(0, -7)
 zoom = Vector2(4, 4)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 3.0
+offset_top = -111.0
+offset_right = 43.0
+offset_bottom = -88.0
+text = "Left/Right: a/d
+Jump: Space
+Melee: L-Mouse"
+label_settings = SubResource("LabelSettings_rpb7h")
