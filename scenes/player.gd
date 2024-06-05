@@ -4,10 +4,16 @@ extends CharacterBody2D
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 @onready var animated_sprite = $AnimatedSprite2D
+@onready var melee_collision_shape = $Area2D/CollisionShape2D2
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func _process(delta):
+	if Input.is_action_just_pressed("melee_attack"):
+		melee_collision_shape.disabled = false
+		animated_sprite.play("melee")
+		melee_collision_shape.disabled = true
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -15,6 +21,7 @@ func _physics_process(delta):
 		velocity.y += gravity * delta
 
 	# Handle jump.
+		
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 
