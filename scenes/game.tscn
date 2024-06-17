@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://5yai36r8frjd"]
+[gd_scene load_steps=10 format=3 uid="uid://5yai36r8frjd"]
 
 [ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_lp7i8"]
 [ext_resource type="Texture2D" uid="uid://ds5tokjnt6q8u" path="res://reused_assets/sprites/world_tileset.png" id="1_nhdpo"]
+[ext_resource type="Script" path="res://scripts/game.gd" id="1_v4e0s"]
 [ext_resource type="PackedScene" uid="uid://ckat4pinvvaf8" path="res://scenes/player.tscn" id="2_msb1j"]
 [ext_resource type="FontFile" uid="uid://mewtu15l7iak" path="res://reused_assets/fonts/PixelOperator8.ttf" id="4_mdfp3"]
 [ext_resource type="PackedScene" uid="uid://c4vtgkty762rr" path="res://scenes/platform.tscn" id="5_x1qrb"]
@@ -404,6 +405,8 @@ font_size = 13
 font_color = Color(1, 1, 1, 0.486275)
 
 [node name="game" type="Node2D"]
+script = ExtResource("1_v4e0s")
+player_scene = ExtResource("2_msb1j")
 
 [node name="GameManager" type="Node2D" parent="."]
 script = ExtResource("1_lp7i8")
@@ -413,11 +416,8 @@ tile_set = SubResource("TileSet_rh227")
 format = 2
 layer_0/tile_data = PackedInt32Array(196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 196611, 0, 0, 196612, 0, 0, 196614, 0, 0, 196615, 0, 0, 196616, 0, 0, 196617, 0, 0, 196618, 0, 0, 196620, 0, 0, 196621, 0, 0, 196622, 0, 0, 196623, 0, 0, 196624, 0, 0, 196626, 0, 0, 196627, 0, 0, 196628, 0, 0, 196629, 0, 0, 196630, 0, 0, 196619, 0, 0, 196613, 0, 0, 196625, 0, 0, 196631, 0, 1, 131095, 0, 1, 65559, 0, 1, -65513, 0, 1, 23, 0, 1, -458729, 0, 1, -393193, 0, 1, -327657, 0, 1, -262121, 0, 1, -196585, 0, 1, -131049, 0, 1, 262143, 0, 1, 196607, 0, 1, 131071, 0, 1, 65535, 0, 1, -1, 0, 1, -65537, 0, 1, -131073, 0, 1, -196609, 0, 1, -262145, 0, 1, -327681, 0, 1, -393217, 0, 1, -458753, 0, 1, -524288, 0, 1, -524287, 0, 1, -524286, 0, 1, -524285, 0, 1, -524284, 0, 1, -524283, 0, 1, -524282, 0, 1, -524281, 0, 1, -524280, 0, 1, -524279, 0, 1, -524278, 0, 1, -524277, 0, 1, -524276, 0, 1, -524275, 0, 1, -524274, 0, 1, -524273, 0, 1, -524272, 0, 1, -524271, 0, 1, -524270, 0, 1, -524269, 0, 1, -524268, 0, 1, -524267, 0, 1, -524266, 0, 1, -524265, 0, 1)
 
-[node name="player" parent="." instance=ExtResource("2_msb1j")]
-position = Vector2(26, 27)
-
-[node name="Camera2D" type="Camera2D" parent="player"]
-position = Vector2(0, -7)
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(26, 20)
 zoom = Vector2(4, 4)
 
 [node name="InstructionLabel" type="Label" parent="."]
@@ -443,3 +443,26 @@ position = Vector2(260, 11)
 
 [node name="AnimatableBody2D3" parent="platforms" instance=ExtResource("5_x1qrb")]
 position = Vector2(209, -17)
+
+[node name="Host" type="Button" parent="."]
+offset_left = -64.0
+offset_top = -38.0
+offset_right = -20.0
+offset_bottom = -7.0
+text = "Host
+"
+
+[node name="Join" type="Button" parent="."]
+offset_left = -60.0
+offset_top = -4.0
+offset_right = -22.0
+offset_bottom = 27.0
+text = "Join
+"
+
+[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+spawn_path = NodePath("..")
+
+[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
+[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
