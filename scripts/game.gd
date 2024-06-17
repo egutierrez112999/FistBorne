@@ -9,13 +9,13 @@ func _on_host_pressed():
 	multiplayer.multiplayer_peer = peer
 	multiplayer.peer_connected.connect(add_player)
 	add_player()
-	cam.enabled = false
+	#cam.enabled = false
 
 
 func _on_join_pressed():
 	peer.create_client("127.0.0.1", 123)
 	multiplayer.multiplayer_peer = peer
-	cam.enabled = false
+	#cam.enabled = false
 
 
 func add_player(id = 1):

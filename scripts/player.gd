@@ -5,14 +5,13 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 @onready var animated_sprite = $AnimatedSprite2D
 @onready var melee_collision_shape = $Area2D/CollisionShape2D2
-@onready var player_cam = $Camera2D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _enter_tree():
 	set_multiplayer_authority(name.to_int())
-	#player_cam.enabled = false#is_multiplayer_authority()
+	#player_cam.enabled = is_multiplayer_authority()
 
 func _process(_delta):
 	if Input.is_action_just_pressed("melee_attack"):

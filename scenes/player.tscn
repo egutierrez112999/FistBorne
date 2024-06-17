@@ -233,10 +233,6 @@ autoplay = "idle"
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_uj6yc")
 
-[node name="Camera2D" type="Camera2D" parent="."]
-enabled = false
-zoom = Vector2(4, 4)
-
 [node name="Area2D" type="Area2D" parent="."]
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
