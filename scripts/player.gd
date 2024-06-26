@@ -4,8 +4,10 @@ extends CharacterBody2D
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 @onready var animated_sprite = $AnimatedSprite2D
-@onready var melee_collision_shape = $Area2D/CollisionShape2D2
+@onready var melee_collision_shape = $killzone/CollisionShape2D2
 
+
+var eDelta = 0
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
@@ -16,10 +18,11 @@ func _enter_tree():
 func _process(_delta):
 	if Input.is_action_just_pressed("melee_attack"):
 		melee_collision_shape.disabled = false
-		animated_sprite.play("melee")
+		#animated_sprite.play("melee")
 		melee_collision_shape.disabled = true
 
 func _physics_process(delta):
+	eDelta = delta
 	if is_multiplayer_authority():
 		# Add the gravity.
 		if not is_on_floor():
@@ -54,3 +57,15 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		move_and_slide()
+		
+@rpc("unreliable","any_peer","call_local") func updatePos(id,pos):
+	if !is_multiplayer_authority():
+		if name ==id:
+			position = lerp(position, pos, eDelta*15)
+			
+
+
+
+func _on_timer_timeout():
+	if is_multiplayer_authority():
+		rpc("updatePos", name, position)

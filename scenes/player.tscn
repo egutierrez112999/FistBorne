@@ -2,6 +2,7 @@
 
 [ext_resource type="Texture2D" uid="uid://dvseo671tng1k" path="res://reused_assets/sprites/knight.png" id="1_4au20"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hryeq"]
+[ext_resource type="PackedScene" uid="uid://dxhce60nws1jp" path="res://scenes/killzone.tscn" id="3_4qqox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trrfm"]
 atlas = ExtResource("1_4au20")
@@ -214,11 +215,6 @@ radius = 5.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p37em"]
 size = Vector2(10, 8)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_2gl7y"]
-properties/0/path = NodePath(".:position")
-properties/0/spawn = true
-properties/0/replication_mode = 1
-
 [node name="player" type="CharacterBody2D"]
 z_index = 5
 script = ExtResource("1_hryeq")
@@ -233,12 +229,16 @@ autoplay = "idle"
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_uj6yc")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="killzone" parent="." instance=ExtResource("3_4qqox")]
+position = Vector2(1, -5)
 
-[node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
-position = Vector2(11, -5)
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="killzone"]
+position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_p37em")
 disabled = true
 
-[node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
-replication_config = SubResource("SceneReplicationConfig_2gl7y")
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.05
+autostart = true
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

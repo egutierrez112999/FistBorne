@@ -5,16 +5,18 @@ var peer = ENetMultiplayerPeer.new()
 @onready var cam = $Camera2D
 
 func _on_host_pressed():
-	peer.create_server(123)
-	multiplayer.multiplayer_peer = peer
-	multiplayer.peer_connected.connect(add_player)
-	add_player()
+	if !multiplayer.multiplayer_peer == peer:
+		peer.create_server(123)
+		multiplayer.multiplayer_peer = peer
+		multiplayer.peer_connected.connect(add_player)
+		add_player()
 	#cam.enabled = false
 
 
 func _on_join_pressed():
-	peer.create_client("127.0.0.1", 123)
-	multiplayer.multiplayer_peer = peer
+	if !multiplayer.multiplayer_peer == peer:
+		peer.create_client("127.0.0.1", 123)
+		multiplayer.multiplayer_peer = peer
 	#cam.enabled = false
 
 
