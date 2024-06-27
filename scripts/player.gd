@@ -15,11 +15,6 @@ func _enter_tree():
 	set_multiplayer_authority(name.to_int())
 	#player_cam.enabled = is_multiplayer_authority()
 
-func _process(_delta):
-	if Input.is_action_just_pressed("melee_attack"):
-		melee_collision_shape.disabled = false
-		animated_sprite.play("melee")
-		melee_collision_shape.disabled = true
 
 func _physics_process(delta):
 	eDelta = delta
@@ -67,3 +62,16 @@ func _physics_process(delta):
 func _on_timer_timeout():
 	if is_multiplayer_authority():
 		rpc("updatePos", name, position)
+		
+		
+func _process(_delta):
+	if Input.is_action_just_pressed("melee_attack"):
+		rpc('melee_attack_made')
+		melee_collision_shape.disabled = false
+		animated_sprite.play("melee")
+		melee_collision_shape.disabled = true
+		
+@rpc("any_peer","call_local","reliable") func melee_attack_made():
+	print("skibidi rizz")
+
+
