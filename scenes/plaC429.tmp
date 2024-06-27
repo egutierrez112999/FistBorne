@@ -213,7 +213,7 @@ animations = [{
 radius = 5.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_p37em"]
-size = Vector2(7, 8)
+size = Vector2(10, 8)
 
 [node name="player" type="CharacterBody2D"]
 z_index = 5
@@ -225,7 +225,7 @@ sprite_frames = SubResource("SpriteFrames_jf0tc")
 animation = &"melee"
 autoplay = "idle"
 
-[node name="PlayerCollisionBody2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_uj6yc")
 
@@ -233,7 +233,7 @@ shape = SubResource("CircleShape2D_uj6yc")
 position = Vector2(1, -5)
 
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killzone"]
-position = Vector2(11.5, 0)
+position = Vector2(10, 0)
 shape = SubResource("RectangleShape2D_p37em")
 
 [node name="Timer" type="Timer" parent="."]

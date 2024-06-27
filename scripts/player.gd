@@ -18,7 +18,7 @@ func _enter_tree():
 func _process(_delta):
 	if Input.is_action_just_pressed("melee_attack"):
 		melee_collision_shape.disabled = false
-		#animated_sprite.play("melee")
+		animated_sprite.play("melee")
 		melee_collision_shape.disabled = true
 
 func _physics_process(delta):
@@ -63,8 +63,6 @@ func _physics_process(delta):
 		if name ==id:
 			position = lerp(position, pos, eDelta*15)
 			
-
-
 
 func _on_timer_timeout():
 	if is_multiplayer_authority():

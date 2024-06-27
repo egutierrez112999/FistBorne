@@ -1,11 +1,24 @@
 [gd_scene load_steps=10 format=3 uid="uid://5yai36r8frjd"]
 
-[ext_resource type="Script" path="res://scripts/game_manager.gd" id="1_lp7i8"]
 [ext_resource type="Texture2D" uid="uid://ds5tokjnt6q8u" path="res://reused_assets/sprites/world_tileset.png" id="1_nhdpo"]
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_v4e0s"]
 [ext_resource type="PackedScene" uid="uid://ckat4pinvvaf8" path="res://scenes/player.tscn" id="2_msb1j"]
 [ext_resource type="FontFile" uid="uid://mewtu15l7iak" path="res://reused_assets/fonts/PixelOperator8.ttf" id="4_mdfp3"]
 [ext_resource type="PackedScene" uid="uid://c4vtgkty762rr" path="res://scenes/platform.tscn" id="5_x1qrb"]
+
+[sub_resource type="GDScript" id="GDScript_3aued"]
+script/source = "extends Node2D
+
+
+# Called when the node enters the scene tree for the first time.
+func _ready():
+	pass # Replace with function body.
+
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(_delta):
+	pass
+"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2gwk5"]
 texture = ExtResource("1_nhdpo")
@@ -409,7 +422,7 @@ script = ExtResource("1_v4e0s")
 player_scene = ExtResource("2_msb1j")
 
 [node name="GameManager" type="Node2D" parent="."]
-script = ExtResource("1_lp7i8")
+script = SubResource("GDScript_3aued")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_rh227")
