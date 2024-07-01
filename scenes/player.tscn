@@ -235,9 +235,14 @@ position = Vector2(1, -5)
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="killzone"]
 position = Vector2(11.5, 0)
 shape = SubResource("RectangleShape2D_p37em")
+disabled = true
 
 [node name="Timer" type="Timer" parent="."]
 wait_time = 0.05
 autostart = true
 
+[node name="att_timer" type="Timer" parent="."]
+one_shot = true
+
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="att_timer" to="." method="_on_att_timer_timeout"]

@@ -3,8 +3,12 @@ extends CharacterBody2D
 
 const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
-@onready var animated_sprite = $AnimatedSprite2D
+var can_attack = true #THis will be used to tell when a player can attack
+var health = 100
+
+@onready var animated_sprite = $AnimatedSprite2D 
 @onready var melee_collision_shape = $killzone/CollisionShape2D2
+@onready var att_timer = $att_timer
 
 
 var eDelta = 0
@@ -65,13 +69,17 @@ func _on_timer_timeout():
 		
 		
 func _process(_delta):
-	if Input.is_action_just_pressed("melee_attack"):
+	if Input.is_action_just_pressed("melee_attack") && can_attack:
+		can_attack = false
 		rpc('melee_attack_made')
-		melee_collision_shape.disabled = false
-		animated_sprite.play("melee")
-		melee_collision_shape.disabled = true
 		
 @rpc("any_peer","call_local","reliable") func melee_attack_made():
-	print("skibidi rizz")
+	att_timer.start()
+	print("Timer Started")
+	melee_collision_shape.disabled = false
+	animated_sprite.play("melee")
 
-
+func _on_att_timer_timeout():
+	print("timer timeout")
+	melee_collision_shape.disabled = true
+	can_attack = true

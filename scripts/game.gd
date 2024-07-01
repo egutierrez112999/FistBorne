@@ -1,6 +1,8 @@
 extends Node2D
 
 var peer = ENetMultiplayerPeer.new()
+var players = {}
+
 @export var player_scene : PackedScene
 @onready var cam = $Camera2D
 
