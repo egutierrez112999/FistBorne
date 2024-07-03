@@ -225,7 +225,7 @@ sprite_frames = SubResource("SpriteFrames_jf0tc")
 animation = &"melee"
 autoplay = "idle"
 
-[node name="PlayerCollisionBody2D" type="CollisionShape2D" parent="."]
+[node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_uj6yc")
 

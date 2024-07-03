@@ -71,13 +71,14 @@ func _on_timer_timeout():
 func _process(_delta):
 	if Input.is_action_just_pressed("melee_attack") && can_attack:
 		can_attack = false
-		rpc('melee_attack_made')
+		rpc('try_melee_attack')
 		
-@rpc("any_peer","call_local","reliable") func melee_attack_made():
-	att_timer.start()
-	print("Timer Started")
-	melee_collision_shape.disabled = false
-	animated_sprite.play("melee")
+@rpc("any_peer","call_local","reliable") func try_melee_attack():
+	rpc("check_attack", 1, get_multiplayer_authority())
+	#att_timer.start()
+	#print("Timer Started")
+	#melee_collision_shape.disabled = false
+	#animated_sprite.play("melee")
 
 func _on_att_timer_timeout():
 	print("timer timeout")
