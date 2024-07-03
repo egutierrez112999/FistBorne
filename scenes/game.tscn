@@ -1,24 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://5yai36r8frjd"]
+[gd_scene load_steps=9 format=3 uid="uid://5yai36r8frjd"]
 
+[ext_resource type="Script" path="res://scripts/SceneManager.gd" id="1_0stj4"]
 [ext_resource type="Texture2D" uid="uid://ds5tokjnt6q8u" path="res://reused_assets/sprites/world_tileset.png" id="1_nhdpo"]
-[ext_resource type="Script" path="res://scripts/game.gd" id="1_v4e0s"]
 [ext_resource type="PackedScene" uid="uid://ckat4pinvvaf8" path="res://scenes/player.tscn" id="2_msb1j"]
 [ext_resource type="FontFile" uid="uid://mewtu15l7iak" path="res://reused_assets/fonts/PixelOperator8.ttf" id="4_mdfp3"]
 [ext_resource type="PackedScene" uid="uid://c4vtgkty762rr" path="res://scenes/platform.tscn" id="5_x1qrb"]
-
-[sub_resource type="GDScript" id="GDScript_3aued"]
-script/source = "extends Node2D
-
-
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass # Replace with function body.
-
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(_delta):
-	pass
-"
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2gwk5"]
 texture = ExtResource("1_nhdpo")
@@ -418,11 +404,8 @@ font_size = 13
 font_color = Color(1, 1, 1, 0.486275)
 
 [node name="game" type="Node2D"]
-script = ExtResource("1_v4e0s")
+script = ExtResource("1_0stj4")
 player_scene = ExtResource("2_msb1j")
-
-[node name="GameManager" type="Node2D" parent="."]
-script = SubResource("GDScript_3aued")
 
 [node name="TileMap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_rh227")
@@ -457,25 +440,10 @@ position = Vector2(260, 11)
 [node name="AnimatableBody2D3" parent="platforms" instance=ExtResource("5_x1qrb")]
 position = Vector2(209, -17)
 
-[node name="Host" type="Button" parent="."]
-offset_left = 323.0
-offset_top = -110.0
-offset_right = 367.0
-offset_bottom = -79.0
-text = "Host
-"
+[node name="SpawnLocations" type="Node2D" parent="."]
 
-[node name="Join" type="Button" parent="."]
-offset_left = 327.0
-offset_top = -76.0
-offset_right = 365.0
-offset_bottom = -45.0
-text = "Join
-"
+[node name="0" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+position = Vector2(30, 23)
 
-[node name="MultiplayerSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
-spawn_path = NodePath("..")
-
-[connection signal="pressed" from="Host" to="." method="_on_host_pressed"]
-[connection signal="pressed" from="Join" to="." method="_on_join_pressed"]
+[node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+position = Vector2(331, 22)
