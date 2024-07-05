@@ -33,7 +33,9 @@ func connected_failed():
 		GameManager.players[id] = {
 		"name": name,
 		"id":id,
-		"score" : 0
+		"score" : 0,
+		"health": 100,
+		"player": null
 		}
 	if multiplayer.is_server():
 		for i in GameManager.players:

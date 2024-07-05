@@ -6,9 +6,10 @@ const JUMP_VELOCITY = -300.0
 var can_attack = true #THis will be used to tell when a player can attack
 var health = 100
 
-@onready var animated_sprite = $AnimatedSprite2D 
-@onready var melee_collision_shape = $killzone/CollisionShape2D2
+var syncPos = Vector2(0,0)
 
+var syncDirection = 0 #work on this one later to flip animations
+@onready var animated_sprite = $AnimatedSprite2D
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
@@ -18,6 +19,7 @@ func _ready():
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
+		syncPos = global_position
 		# Add the gravity.
 		if not is_on_floor():
 			velocity.y += gravity * delta
@@ -31,8 +33,10 @@ func _physics_process(delta):
 		#flip the sprite
 		if direction > 0:
 			animated_sprite.flip_h = false
+			$killzone/CollisionShape2D2.position = Vector2(11.5, 0)
 		elif direction < 0:
 			animated_sprite.flip_h = true
+			$killzone/CollisionShape2D2.position = Vector2(-11.5, 0)
 		
 		#play animations
 		if is_on_floor():
@@ -50,4 +54,11 @@ func _physics_process(delta):
 			velocity.x = move_toward(velocity.x, 0, SPEED)
 
 		move_and_slide()
-		
+	else:
+		global_position = global_position.lerp(syncPos, .5)
+
+func _process(_delta):
+	if Input.is_action_just_pressed("melee_attack"):
+		pass
+
+	
