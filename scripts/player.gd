@@ -5,6 +5,7 @@ const SPEED = 200.0
 const JUMP_VELOCITY = -300.0
 var can_attack = true #THis will be used to tell when a player can attack
 var health = 100
+var network_id
 
 var syncPos = Vector2(0,0)
 
@@ -61,4 +62,4 @@ func _process(_delta):
 	if Input.is_action_just_pressed("melee_attack"):
 		pass
 
-	
+

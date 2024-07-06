@@ -1,7 +1,7 @@
 extends Control
 
 @export var Address = "127.0.0.1"
-@export var Port = 123
+@export var Port = 9999
 var peer
 
 func _ready():
@@ -69,4 +69,15 @@ func _on_start_game_button_down():
 	var scene = load("res://scenes/game.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
-	
+
+func _process(_delta):
+	for p in GameManager.players:
+		if GameManager.players[p].health <= 0:
+			pass
+			#DeathAlert.rpc(GameManager.players[p].id)
+			
+@rpc("authority","call_local") func DeathAlert(player_id):
+	pass
+	#print("Player "+str(player_id)+" has died")
+	#get_node(GameManager.players[player_id].player).queue_free()
+			
