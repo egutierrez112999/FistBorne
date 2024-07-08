@@ -10,7 +10,6 @@ var direction: Vector2
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())	
 	
-	
 func _physics_process(delta):
 	velocity = SPEED * direction
 	if not is_on_floor():

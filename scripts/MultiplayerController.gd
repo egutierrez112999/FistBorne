@@ -35,6 +35,7 @@ func connected_failed():
 		"id":id,
 		"score" : 0,
 		"health": 100,
+		"metal_reserves":100,
 		"player": null
 		}
 	if multiplayer.is_server():

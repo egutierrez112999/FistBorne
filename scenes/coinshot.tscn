@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://crvb1ohbnxint" path="res://misc/icon.svg" id="2_ntumh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5bj"]
-size = Vector2(10, 8)
+size = Vector2(8, 6)
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_yjvhv"]
 properties/0/path = NodePath(".:position")
@@ -15,12 +15,14 @@ properties/0/replication_mode = 1
 script = ExtResource("1_ahslc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(6, 1)
-scale = Vector2(0.0859375, 0.0703125)
+position = Vector2(4.75, 1.78814e-07)
+scale = Vector2(0.0664063, 0.046875)
 texture = ExtResource("2_ntumh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(6, 1)
+light_mask = 4
+visibility_layer = 2
+position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_gv5bj")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
