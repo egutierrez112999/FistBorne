@@ -11,7 +11,9 @@ properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
-[node name="coinshot" type="CharacterBody2D"]
+[node name="coinshot" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
 script = ExtResource("1_ahslc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
@@ -20,10 +22,10 @@ scale = Vector2(0.0664063, 0.046875)
 texture = ExtResource("2_ntumh")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-light_mask = 4
-visibility_layer = 2
 position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_gv5bj")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_yjvhv")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

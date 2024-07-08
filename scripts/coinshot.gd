@@ -1,17 +1,32 @@
-extends CharacterBody2D
+extends Area2D
 
 
 const SPEED = 300.0
-
-# Get the gravity from the project settings to be synced with RigidBody nodes.
-var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
+#@onready var timer = $Timer
+#var can_attack = true
 var direction: Vector2
+var coin_owner_id
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())	
 	
 func _physics_process(delta):
-	velocity = SPEED * direction
-	if not is_on_floor():
-		velocity.y += gravity * delta
-	move_and_slide()
+	position.x += (direction[0] * SPEED * delta)
+
+func _on_body_entered(body):
+	RangedRequest.rpc_id(1, coin_owner_id, body.network_id)
+
+@rpc("any_peer","call_local","reliable") func RangedRequest(coin_owner_id, defender_body_id):
+	var attacker_id = coin_owner_id
+	if attacker_id != defender_body_id:
+		var attacker_pos = GameManager.players[attacker_id].player.global_position
+		var defender_pos = GameManager.players[defender_body_id].player.global_position
+		print("SUCCESSFUL HIT")
+		print(GameManager.players)
+		print(str(attacker_id))
+		print(str(defender_body_id))
+		GameManager.players[attacker_id].score += 1
+		RangedDamage.rpc_id(0, defender_body_id)
+		
+@rpc("any_peer","call_local") func RangedDamage(defender_id):
+		GameManager.players[defender_id].health -= 20

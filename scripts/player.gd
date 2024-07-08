@@ -66,6 +66,7 @@ func _physics_process(delta):
 @rpc("any_peer","call_local","unreliable") func SpawnBullet():
 	var coin = coin_shot.instantiate()
 	coin.direction = Vector2(syncDirection,0)
+	coin.coin_owner_id = multiplayer.get_remote_sender_id()
 	get_tree().root.add_child(coin)
 	coin.global_position = $killzone/CollisionShape2D2.global_position
 
