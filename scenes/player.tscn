@@ -1,7 +1,8 @@
-[gd_scene load_steps=34 format=3 uid="uid://ckat4pinvvaf8"]
+[gd_scene load_steps=35 format=3 uid="uid://ckat4pinvvaf8"]
 
 [ext_resource type="Texture2D" uid="uid://dvseo671tng1k" path="res://reused_assets/sprites/knight.png" id="1_4au20"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hryeq"]
+[ext_resource type="PackedScene" uid="uid://c0x2m3l5w8uld" path="res://scenes/coinshot.tscn" id="2_45mts"]
 [ext_resource type="PackedScene" uid="uid://dxhce60nws1jp" path="res://scenes/killzone.tscn" id="3_4qqox"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_trrfm"]
@@ -227,6 +228,7 @@ properties/1/replication_mode = 1
 z_index = 5
 collision_layer = 2
 script = ExtResource("1_hryeq")
+coin_shot = ExtResource("2_45mts")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -12)
