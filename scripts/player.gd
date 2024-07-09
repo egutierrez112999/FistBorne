@@ -47,14 +47,14 @@ func _physics_process(delta):
 			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
 				#x logic
 				if new_x > position.x:
-					metal_movement_x = new_x-((new_x-position.x)/2)
+					metal_movement_x = position.x+40#new_x-((new_x-position.x)/2)
 				else:
-					metal_movement_x = new_x+((position.x-new_x)/2)
+					metal_movement_x = position.x-40#new_x+((position.x-new_x)/2)
 				#y logic
 				if new_y > position.y:
-					metal_movement_y = position.y+(abs(new_y-position.y)/2)
+					metal_movement_y = position.y+30#position.y+(abs(new_y-position.y)/2)
 				else:
-					metal_movement_y = position.y-(abs(position.y-new_y)/2)
+					metal_movement_y = position.y-30#position.y-(abs(position.y-new_y)/2)
 				#make sure changes are withing bounds
 				if metal_movement_x > 360:
 					metal_movement_x = 360
@@ -75,14 +75,14 @@ func _physics_process(delta):
 			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
 				#x logic
 				if new_x > position.x:
-					metal_movement_x = position.x-((new_x-position.x)/2)
+					metal_movement_x = position.x-40#(position.x-(new_x-position.x)/2)
 				else:
-					metal_movement_x = position.x+((position.x-new_x)/2)
+					metal_movement_x = position.x+40#(position.x+(position.x-new_x)/2)
 				#y logic
 				if new_y > position.y:
-					metal_movement_y = position.y-(abs(new_y-position.y)/2)
+					metal_movement_y = position.y-30#(position.y-abs(new_y-position.y)/2)
 				else:
-					metal_movement_y = position.y+(abs(position.y-new_y)/2)
+					metal_movement_y = position.y+30#(position.y+abs(position.y-new_y)/2)
 				#make sure changes are withing bounds
 				if metal_movement_x > 360:
 					metal_movement_x = 360
