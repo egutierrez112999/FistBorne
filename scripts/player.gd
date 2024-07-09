@@ -6,6 +6,10 @@ const JUMP_VELOCITY = -300.0
 var can_attack = true #THis will be used to tell when a player can attack
 var health = 100
 var network_id
+var metal_movement_x
+var metal_movement_y
+#var iron_active = false
+#var steel_active = false
 
 var syncPos = Vector2(0,0)
 
@@ -37,18 +41,41 @@ func _physics_process(delta):
 		if Input.is_action_just_pressed("burn_iron"):
 			var mouse_coords = get_viewport().get_mouse_position()
 			var window_size = get_viewport().get_window().size
-			print(position)
 			#( src - src_min ) / ( src_max - src_min ) * ( res_max - res_min ) + res_min
-			var new_y = ( mouse_coords.y - 0 ) / ( window_size.y - 0 ) * ( 47 +80 ) - 80
-			var new_x = ( mouse_coords.x - 0 ) / ( window_size.x - 0 ) * ( 360 - 6 ) + 6
-			print(new_y)
-			print(new_x)
-			position.y = new_y
-			position.x = new_x
-			#global_position.x = mouse_coords.x
+			var new_y = (( mouse_coords.y - 0 ) / ( window_size.y - 0 ) * ( 47 +80 ) - 80)
+			var new_x = (( mouse_coords.x - 0 ) / ( window_size.x - 0 ) * ( 360 - 6 ) + 6)
+			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
+				#x logic
+				if new_x > position.x:
+					metal_movement_x = new_x-((new_x-position.x)/2)
+				else:
+					metal_movement_x = new_x+((position.x-new_x)/2)
+				#y logic
+				if new_y > position.y:
+					metal_movement_y = position.y+(abs(new_y-position.y)/2)
+				else:
+					metal_movement_y = position.y-(abs(position.y-new_y)/2)
+				position.y = metal_movement_y
+				position.x = metal_movement_x
 		if Input.is_action_just_pressed("burn_steel"):
-			velocity.y = -JUMP_VELOCITY
-			velocity.x = -JUMP_VELOCITY *3
+			var mouse_coords = get_viewport().get_mouse_position()
+			var window_size = get_viewport().get_window().size
+			#( src - src_min ) / ( src_max - src_min ) * ( res_max - res_min ) + res_min
+			var new_y = (( mouse_coords.y - 0 ) / ( window_size.y - 0 ) * ( 47 +80 ) - 80)
+			var new_x = (( mouse_coords.x - 0 ) / ( window_size.x - 0 ) * ( 360 - 6 ) + 6)
+			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
+				#x logic
+				if new_x > position.x:
+					metal_movement_x = new_x-((new_x-position.x)/2)
+				else:
+					metal_movement_x = new_x+((position.x-new_x)/2)
+				#y logic
+				if new_y > position.y:
+					metal_movement_y = position.y+(abs(new_y-position.y)/2)
+				else:
+					metal_movement_y = position.y-(abs(position.y-new_y)/2)
+				position.y = metal_movement_y
+				position.x = metal_movement_x
 		if Input.is_action_just_pressed("jump") and is_on_floor():
 			velocity.y = JUMP_VELOCITY
 		# Get the input directio: -1,0,1
