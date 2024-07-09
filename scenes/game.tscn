@@ -399,6 +399,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_2gwk5")
 
 [node name="game" type="Node2D"]
+position = Vector2(16, 128)
 script = ExtResource("1_0stj4")
 player_scene = ExtResource("2_msb1j")
 
@@ -414,16 +415,16 @@ zoom = Vector2(3, 3)
 [node name="platforms" type="Node" parent="."]
 
 [node name="AnimatableBody2D2" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(156, -16)
+position = Vector2(172, 112)
 
 [node name="platform" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(106, 13)
+position = Vector2(122, 141)
 
 [node name="AnimatableBody2D" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(260, 11)
+position = Vector2(276, 139)
 
 [node name="AnimatableBody2D3" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(209, -17)
+position = Vector2(225, 111)
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 
@@ -438,3 +439,4 @@ offset_top = -111.0
 offset_right = 368.0
 offset_bottom = 46.0
 script = ExtResource("5_be0yi")
+metadata/_edit_use_anchors_ = true

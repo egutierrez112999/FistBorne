@@ -16,6 +16,14 @@ var syncDirection = 1 #work on this one later to flip animations
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 
+func normalize(value, min, max):
+	return abs((value-min)/(max-min))
+
+func tp(value, min, max):
+	var n = normalize(value, min, max)
+	return n*(abs(max-min)+min)
+	
+
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 
@@ -27,8 +35,17 @@ func _physics_process(delta):
 			velocity.y += gravity * delta
 		# Handle jump.
 		if Input.is_action_just_pressed("burn_iron"):
-			velocity.y = JUMP_VELOCITY
-			velocity.x = JUMP_VELOCITY*3
+			var mouse_coords = get_viewport().get_mouse_position()
+			var window_size = get_viewport().get_window().size
+			print(position)
+			#( src - src_min ) / ( src_max - src_min ) * ( res_max - res_min ) + res_min
+			var new_y = ( mouse_coords.y - 0 ) / ( window_size.y - 0 ) * ( 47 +80 ) - 80
+			var new_x = ( mouse_coords.x - 0 ) / ( window_size.x - 0 ) * ( 360 - 6 ) + 6
+			print(new_y)
+			print(new_x)
+			position.y = new_y
+			position.x = new_x
+			#global_position.x = mouse_coords.x
 		if Input.is_action_just_pressed("burn_steel"):
 			velocity.y = -JUMP_VELOCITY
 			velocity.x = -JUMP_VELOCITY *3
