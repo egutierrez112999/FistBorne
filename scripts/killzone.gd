@@ -21,6 +21,7 @@ func _on_body_entered(body):
 			print(str(defender_body_id))
 			GameManager.players[attacker_id].score += 1
 			TakeDamage.rpc_id(0, defender_body_id)
+	GameManager.changeText = true
 		
 @rpc("any_peer","call_local") func TakeDamage(defender_id):
 		GameManager.players[defender_id].health -= 30

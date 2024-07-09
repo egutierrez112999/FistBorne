@@ -19,14 +19,13 @@ func _on_body_entered(body):
 @rpc("any_peer","call_local","reliable") func RangedRequest(coin_owner_id, defender_body_id):
 	var attacker_id = coin_owner_id
 	if attacker_id != defender_body_id:
-		var attacker_pos = GameManager.players[attacker_id].player.global_position
-		var defender_pos = GameManager.players[defender_body_id].player.global_position
 		print("SUCCESSFUL HIT")
 		print(GameManager.players)
 		print(str(attacker_id))
 		print(str(defender_body_id))
 		GameManager.players[attacker_id].score += 1
 		RangedDamage.rpc_id(0, defender_body_id)
+	GameManager.changeText = true
 		
 @rpc("any_peer","call_local") func RangedDamage(defender_id):
 		GameManager.players[defender_id].health -= 20
