@@ -17,4 +17,3 @@ func _ready():
 				current_player.global_position = spawn.global_position
 		index +=1
 
-

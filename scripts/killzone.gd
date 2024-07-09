@@ -15,10 +15,10 @@ func _on_body_entered(body):
 		var attacker_pos = GameManager.players[attacker_id].player.global_position
 		var defender_pos = GameManager.players[defender_body_id].player.global_position
 		if (abs(attacker_pos[0]-defender_pos[0]) < 20) and (abs(attacker_pos[1]-defender_pos[1]) < 20):
-			print("SUCCESFUL HIT")
-			print(GameManager.players)
-			print(str(attacker_id))
-			print(str(defender_body_id))
+			#print("SUCCESFUL HIT")
+			#print(GameManager.players)
+			#print(str(attacker_id))
+			#print(str(defender_body_id))
 			GameManager.players[attacker_id].score += 1
 			TakeDamage.rpc_id(0, defender_body_id)
 	GameManager.changeText = true
