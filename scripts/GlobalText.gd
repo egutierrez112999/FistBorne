@@ -9,7 +9,8 @@ func format_player_data():
 	var player_deets = GameManager.players
 	for p in player_deets:
 		formatted_str = formatted_str + str(player_deets[p].name) + ": "
-		formatted_str = formatted_str + "health - " + str(player_deets[p].health) + "\n"
+		formatted_str = formatted_str + "health - " + str(player_deets[p].health) + ", "
+		formatted_str = formatted_str + "M.R. - " + str(player_deets[p].health) + "\n"
 	return formatted_str
 
 

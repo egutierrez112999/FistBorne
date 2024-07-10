@@ -8,6 +8,8 @@ var health = 100
 var network_id
 var metal_movement_x
 var metal_movement_y
+var x_modifier = 40
+var y_modifier = 30
 #var iron_active = false
 #var steel_active = false
 
@@ -19,17 +21,11 @@ var syncDirection = 1 #work on this one later to flip animations
 
 # Get the gravity from the project settings to be synced with RigidBody nodes.
 var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
-
-func normalize(value, min, max):
-	return abs((value-min)/(max-min))
-
-func tp(value, min, max):
-	var n = normalize(value, min, max)
-	return n*(abs(max-min)+min)
 	
 
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
+	$killzone.active = false
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -47,14 +43,14 @@ func _physics_process(delta):
 			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
 				#x logic
 				if new_x > position.x:
-					metal_movement_x = position.x+40#new_x-((new_x-position.x)/2)
+					metal_movement_x = position.x+x_modifier#new_x-((new_x-position.x)/2)
 				else:
-					metal_movement_x = position.x-40#new_x+((position.x-new_x)/2)
+					metal_movement_x = position.x-x_modifier#new_x+((position.x-new_x)/2)
 				#y logic
 				if new_y > position.y:
-					metal_movement_y = position.y+30#position.y+(abs(new_y-position.y)/2)
+					metal_movement_y = position.y+y_modifier#position.y+(abs(new_y-position.y)/2)
 				else:
-					metal_movement_y = position.y-30#position.y-(abs(position.y-new_y)/2)
+					metal_movement_y = position.y-y_modifier#position.y-(abs(position.y-new_y)/2)
 				#make sure changes are withing bounds
 				if metal_movement_x > 360:
 					metal_movement_x = 360
@@ -75,14 +71,14 @@ func _physics_process(delta):
 			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
 				#x logic
 				if new_x > position.x:
-					metal_movement_x = position.x-40#(position.x-(new_x-position.x)/2)
+					metal_movement_x = position.x-x_modifier#(position.x-(new_x-position.x)/2)
 				else:
-					metal_movement_x = position.x+40#(position.x+(position.x-new_x)/2)
+					metal_movement_x = position.x+x_modifier#(position.x+(position.x-new_x)/2)
 				#y logic
 				if new_y > position.y:
-					metal_movement_y = position.y-30#(position.y-abs(new_y-position.y)/2)
+					metal_movement_y = position.y-y_modifier#(position.y-abs(new_y-position.y)/2)
 				else:
-					metal_movement_y = position.y+30#(position.y+abs(position.y-new_y)/2)
+					metal_movement_y = position.y+y_modifier#(position.y+abs(position.y-new_y)/2)
 				#make sure changes are withing bounds
 				if metal_movement_x > 360:
 					metal_movement_x = 360
@@ -125,6 +121,12 @@ func _physics_process(delta):
 		
 		if Input.is_action_just_pressed("ranged_attack"):
 			SpawnBullet.rpc()
+			
+		if Input.is_action_just_pressed("melee_attack") and can_attack:
+			$Timer.start()
+			$killzone.active = true
+			can_attack = false
+			
 
 		move_and_slide()
 	else:
@@ -137,6 +139,9 @@ func _physics_process(delta):
 	coin.coin_owner_id = multiplayer.get_remote_sender_id()
 	get_tree().root.add_child(coin)
 	coin.global_position = $killzone/CollisionShape2D2.global_position
+	
 
 
-
+func _on_timer_timeout():
+	$killzone.active = false
+	can_attack = true
