@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://5yai36r8frjd"]
+[gd_scene load_steps=9 format=3 uid="uid://5yai36r8frjd"]
 
 [ext_resource type="Script" path="res://scripts/SceneManager.gd" id="1_0stj4"]
 [ext_resource type="Texture2D" uid="uid://ds5tokjnt6q8u" path="res://reused_assets/sprites/world_tileset.png" id="1_nhdpo"]
 [ext_resource type="PackedScene" uid="uid://ckat4pinvvaf8" path="res://scenes/player.tscn" id="2_msb1j"]
 [ext_resource type="Script" path="res://scripts/GlobalText.gd" id="5_be0yi"]
 [ext_resource type="PackedScene" uid="uid://c4vtgkty762rr" path="res://scenes/platform.tscn" id="5_x1qrb"]
+[ext_resource type="PackedScene" uid="uid://bk1658lnnovbw" path="res://scenes/metal_vial.tscn" id="6_ncx6w"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_2gwk5"]
 texture = ExtResource("1_nhdpo")
@@ -440,3 +441,6 @@ offset_right = 368.0
 offset_bottom = 46.0
 script = ExtResource("5_be0yi")
 metadata/_edit_use_anchors_ = true
+
+[node name="Area2D" parent="." instance=ExtResource("6_ncx6w")]
+position = Vector2(156, -31)
