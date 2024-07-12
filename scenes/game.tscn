@@ -413,19 +413,12 @@ layer_0/tile_data = PackedInt32Array(196608, 0, 0, 196609, 0, 0, 196610, 0, 0, 1
 position = Vector2(183, -31)
 zoom = Vector2(3, 3)
 
-[node name="platforms" type="Node" parent="."]
-
-[node name="AnimatableBody2D2" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(172, 112)
-
-[node name="platform" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(122, 141)
-
-[node name="AnimatableBody2D" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(276, 139)
-
-[node name="AnimatableBody2D3" parent="platforms" instance=ExtResource("5_x1qrb")]
-position = Vector2(225, 111)
+[node name="GameText" type="RichTextLabel" parent="."]
+offset_top = -111.0
+offset_right = 368.0
+offset_bottom = 46.0
+script = ExtResource("5_be0yi")
+metadata/_edit_use_anchors_ = true
 
 [node name="SpawnLocations" type="Node2D" parent="."]
 
@@ -435,12 +428,33 @@ position = Vector2(30, 23)
 [node name="1" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
 position = Vector2(331, 22)
 
-[node name="GameText" type="RichTextLabel" parent="."]
-offset_top = -111.0
-offset_right = 368.0
-offset_bottom = 46.0
-script = ExtResource("5_be0yi")
-metadata/_edit_use_anchors_ = true
+[node name="2" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+position = Vector2(106, -19)
 
-[node name="Area2D" parent="." instance=ExtResource("6_ncx6w")]
-position = Vector2(156, -31)
+[node name="3" type="Node2D" parent="SpawnLocations" groups=["PlayerSpawnPoint"]]
+position = Vector2(260, -20)
+
+[node name="Platforms" type="Node" parent="."]
+
+[node name="AnimatableBody2D2" parent="Platforms" instance=ExtResource("5_x1qrb")]
+position = Vector2(172, 112)
+
+[node name="platform" parent="Platforms" instance=ExtResource("5_x1qrb")]
+position = Vector2(122, 141)
+
+[node name="AnimatableBody2D" parent="Platforms" instance=ExtResource("5_x1qrb")]
+position = Vector2(276, 139)
+
+[node name="AnimatableBody2D3" parent="Platforms" instance=ExtResource("5_x1qrb")]
+position = Vector2(225, 111)
+
+[node name="MetalVials" type="Node" parent="."]
+
+[node name="MetalVial1" parent="MetalVials" instance=ExtResource("6_ncx6w")]
+position = Vector2(58, 109)
+
+[node name="MetalVial2" parent="MetalVials" instance=ExtResource("6_ncx6w")]
+position = Vector2(199, 58)
+
+[node name="MetalVial3" parent="MetalVials" instance=ExtResource("6_ncx6w")]
+position = Vector2(349, 111)

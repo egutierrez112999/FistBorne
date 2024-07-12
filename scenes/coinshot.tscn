@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0x2m3l5w8uld"]
 
 [ext_resource type="Script" path="res://scripts/coinshot.gd" id="1_ahslc"]
-[ext_resource type="Texture2D" uid="uid://crvb1ohbnxint" path="res://misc/icon.svg" id="2_ntumh"]
+[ext_resource type="Texture2D" uid="uid://d24yirnc3racj" path="res://clip_sprite.png" id="2_w8slp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5bj"]
 size = Vector2(8, 6)
@@ -17,12 +17,11 @@ collision_mask = 2
 script = ExtResource("1_ahslc")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(4.75, 1.78814e-07)
-scale = Vector2(0.0664063, 0.046875)
-texture = ExtResource("2_ntumh")
+position = Vector2(1.49012e-08, -5.96046e-08)
+scale = Vector2(0.1, 0.075)
+texture = ExtResource("2_w8slp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, 0)
 shape = SubResource("RectangleShape2D_gv5bj")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]

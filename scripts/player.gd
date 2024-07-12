@@ -15,7 +15,7 @@ var x_modifier = 40
 var y_modifier = 30
 #var iron_active = false
 #var steel_active = false
-
+var melee_x_position #variable to help flip the position of the melee collisionshape
 var syncPos = Vector2(0,0)
 
 var syncDirection = 1 #work on this one later to flip animations
@@ -29,6 +29,7 @@ var gravity = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready():
 	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())
 	$killzone.active = false
+	melee_x_position = abs(position.x-$killzone/CollisionShape2D2.position.x)
 
 func _physics_process(delta):
 	if $MultiplayerSynchronizer.get_multiplayer_authority() == multiplayer.get_unique_id():
@@ -74,6 +75,7 @@ func _physics_process(delta):
 			var new_y = (( mouse_coords.y - 0 ) / ( window_size.y - 0 ) * ( 47 +80 ) - 80)
 			var new_x = (( mouse_coords.x - 0 ) / ( window_size.x - 0 ) * ( 360 - 6 ) + 6)
 			if ((new_y < 47)and(new_y > -80)and(new_x < 360)and(new_x > 6)):
+				#var slope = (new_y-position.y)/(new_x-position.x)#y2-y1/x2-x1
 				#x logic
 				if new_x > position.x:
 					metal_movement_x = position.x-x_modifier#(position.x-(new_x-position.x)/2)
@@ -103,12 +105,12 @@ func _physics_process(delta):
 		if direction > 0:
 			animated_sprite.flip_h = false
 			syncDirection = 1
-			$killzone/CollisionShape2D2.position = Vector2(11.5, 0)
+			$killzone/CollisionShape2D2.position = Vector2(melee_x_position, 0)
 			
 		elif direction < 0:
 			animated_sprite.flip_h = true
 			syncDirection = -1
-			$killzone/CollisionShape2D2.position = Vector2(-11.5, 0)
+			$killzone/CollisionShape2D2.position = Vector2(-melee_x_position, 0)
 		#play animations
 		if is_on_floor():
 			if direction == 0:

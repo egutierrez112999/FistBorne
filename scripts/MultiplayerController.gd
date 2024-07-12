@@ -34,7 +34,7 @@ func connected_failed():
 		"name": name,
 		"id":id,
 		"score" : 0,
-		"health": 100,
+		"health": 150,
 		"metal_reserves":100,
 		"player": null
 		}
