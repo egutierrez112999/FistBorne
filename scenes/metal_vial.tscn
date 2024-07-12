@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bk1658lnnovbw"]
 
 [ext_resource type="Script" path="res://scripts/metal_vial.gd" id="1_85jru"]
-[ext_resource type="Texture2D" uid="uid://c0xsk46i7xx8i" path="res://metal_vial_sprite.png" id="2_jho3s"]
+[ext_resource type="Texture2D" uid="uid://c0xsk46i7xx8i" path="res://assets/metal_vial_sprite.png" id="2_jho3s"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_205l5"]
 animations = [{

@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c0x2m3l5w8uld"]
 
 [ext_resource type="Script" path="res://scripts/coinshot.gd" id="1_ahslc"]
-[ext_resource type="Texture2D" uid="uid://d24yirnc3racj" path="res://clip_sprite.png" id="2_w8slp"]
+[ext_resource type="Texture2D" uid="uid://d24yirnc3racj" path="res://assets/clip_sprite.png" id="2_w8slp"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gv5bj"]
 size = Vector2(8, 6)

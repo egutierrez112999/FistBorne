@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c0xsk46i7xx8i"
-path="res://.godot/imported/metal_vial_sprite.png-171b99c8f367fb45b52654f4f387d68d.ctex"
+uid="uid://lqsbyyonprsk"
+path="res://.godot/imported/luthadel_background.png-56ea26d1bb4122ee5eee526b1aa4daeb.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://metal_vial_sprite.png"
-dest_files=["res://.godot/imported/metal_vial_sprite.png-171b99c8f367fb45b52654f4f387d68d.ctex"]
+source_file="res://assets/luthadel_background.png"
+dest_files=["res://.godot/imported/luthadel_background.png-56ea26d1bb4122ee5eee526b1aa4daeb.ctex"]
 
 [params]
 
