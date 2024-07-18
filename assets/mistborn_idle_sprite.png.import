@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://cr0n52l652474"
-path="res://.godot/imported/luthadel_background.png-56ea26d1bb4122ee5eee526b1aa4daeb.ctex"
+uid="uid://rxil6jiihb1g"
+path="res://.godot/imported/mistborn_idle_sprite.png-c3be447242be019c270dee2dd1bcbfe1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/luthadel_background.png"
-dest_files=["res://.godot/imported/luthadel_background.png-56ea26d1bb4122ee5eee526b1aa4daeb.ctex"]
+source_file="res://assets/mistborn_idle_sprite.png"
+dest_files=["res://.godot/imported/mistborn_idle_sprite.png-c3be447242be019c270dee2dd1bcbfe1.ctex"]
 
 [params]
 

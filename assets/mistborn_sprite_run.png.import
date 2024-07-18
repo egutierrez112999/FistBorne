@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://rxil6jiihb1g"
-path="res://.godot/imported/mistborn_sprite.png-6e4aff76a9f74d2c8e207883472009d7.ctex"
+uid="uid://ca8jg3s4jkdk1"
+path="res://.godot/imported/mistborn_sprite_run.png-32fbd8c4c197db57f16d66d642e89f9d.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://mistborn_sprite.png"
-dest_files=["res://.godot/imported/mistborn_sprite.png-6e4aff76a9f74d2c8e207883472009d7.ctex"]
+source_file="res://assets/mistborn_sprite_run.png"
+dest_files=["res://.godot/imported/mistborn_sprite_run.png-32fbd8c4c197db57f16d66d642e89f9d.ctex"]
 
 [params]
 
