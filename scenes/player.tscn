@@ -1,29 +1,30 @@
-[gd_scene load_steps=35 format=3 uid="uid://ckat4pinvvaf8"]
+[gd_scene load_steps=36 format=3 uid="uid://ckat4pinvvaf8"]
 
 [ext_resource type="Texture2D" uid="uid://dvseo671tng1k" path="res://reused_assets/sprites/knight.png" id="1_4au20"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_hryeq"]
 [ext_resource type="PackedScene" uid="uid://c0x2m3l5w8uld" path="res://scenes/coinshot.tscn" id="2_45mts"]
 [ext_resource type="PackedScene" uid="uid://dxhce60nws1jp" path="res://scenes/killzone.tscn" id="3_4qqox"]
+[ext_resource type="Texture2D" uid="uid://rxil6jiihb1g" path="res://mistborn_sprite.png" id="3_p46lt"]
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_trrfm"]
-atlas = ExtResource("1_4au20")
-region = Rect2(0, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_og6xw"]
+atlas = ExtResource("3_p46lt")
+region = Rect2(0, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_6lfrx"]
-atlas = ExtResource("1_4au20")
-region = Rect2(32, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pb2nb"]
+atlas = ExtResource("3_p46lt")
+region = Rect2(16, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_bdded"]
-atlas = ExtResource("1_4au20")
-region = Rect2(64, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_kt6nn"]
+atlas = ExtResource("3_p46lt")
+region = Rect2(32, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fy8vs"]
-atlas = ExtResource("1_4au20")
-region = Rect2(96, 0, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_sm0yl"]
+atlas = ExtResource("3_p46lt")
+region = Rect2(48, 0, 16, 16)
 
-[sub_resource type="AtlasTexture" id="AtlasTexture_fxwad"]
-atlas = ExtResource("1_4au20")
-region = Rect2(64, 160, 32, 32)
+[sub_resource type="AtlasTexture" id="AtlasTexture_pq1w6"]
+atlas = ExtResource("3_p46lt")
+region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_lps35"]
 atlas = ExtResource("1_4au20")
@@ -113,16 +114,16 @@ region = Rect2(224, 96, 32, 32)
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_trrfm")
+"texture": SubResource("AtlasTexture_og6xw")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_6lfrx")
+"texture": SubResource("AtlasTexture_pb2nb")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_bdded")
+"texture": SubResource("AtlasTexture_kt6nn")
 }, {
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fy8vs")
+"texture": SubResource("AtlasTexture_sm0yl")
 }],
 "loop": true,
 "name": &"idle",
@@ -130,7 +131,7 @@ animations = [{
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("AtlasTexture_fxwad")
+"texture": SubResource("AtlasTexture_pq1w6")
 }],
 "loop": true,
 "name": &"jump",
@@ -234,9 +235,9 @@ script = ExtResource("1_hryeq")
 coin_shot = ExtResource("2_45mts")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
-position = Vector2(0, -12)
+position = Vector2(1, -8)
 sprite_frames = SubResource("SpriteFrames_jf0tc")
-animation = &"melee"
+animation = &"run"
 autoplay = "idle"
 
 [node name="PlayerCollisionShape2D" type="CollisionShape2D" parent="."]
