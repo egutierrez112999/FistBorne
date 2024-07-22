@@ -3,6 +3,7 @@ extends Control
 @export var Address = "127.0.0.1"
 @export var Port = 9999
 var peer
+var scene
 
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
@@ -67,16 +68,20 @@ func _on_start_game_button_down():
 	StartGame.rpc()
 	
 @rpc("any_peer","call_local") func StartGame():
-	var scene = load("res://scenes/game.tscn").instantiate()
+	scene = load("res://scenes/game.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
-'''
+
+
 @rpc("any_peer","call_local") func EndGame():
-	for i in get_tree().root.get_children():
-		get_tree().root.remove_child(i)
+	#for i in get_tree().root.get_children():
+		#get_tree().root.remove_child(i)
+	get_tree().root.remove_child(scene)
+	get_tree().reload_current_scene()
+	multiplayer.disconnect_peer(1)
 		
 
 func _process(_delta):
 	for p in GameManager.players:
 		if GameManager.players[p].health <= 0:
-			EndGame.rpc()'''
+			EndGame.rpc()
