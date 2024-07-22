@@ -4,6 +4,7 @@ var active
 
 func _on_body_entered(body):
 	if active:
+		print("Attack registered")
 		MeleeRequest.rpc_id(1, body.network_id)
 
 @rpc("any_peer","call_local","reliable") func MeleeRequest(defender_body_id):
