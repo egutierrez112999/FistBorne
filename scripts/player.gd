@@ -134,6 +134,7 @@ func _physics_process(delta):
 			$Timer.start()
 			$killzone.active = true
 			can_attack = false
+			$killzone.collision_detection()
 			
 
 		move_and_slide()

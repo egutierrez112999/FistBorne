@@ -2,10 +2,17 @@ extends Area2D
 
 var active
 
-func _on_body_entered(body):
-	if active:
-		print("Attack registered")
-		MeleeRequest.rpc_id(1, body.network_id)
+func collision_detection():
+	if has_overlapping_bodies() and active:
+		var body_list = get_overlapping_bodies()
+		print(body_list)
+		for body in body_list:
+			MeleeRequest.rpc_id(1, body.network_id)
+
+#func _on_body_entered(body):
+#	if active:
+#		print("Attack registered")
+#		MeleeRequest.rpc_id(1, body.network_id)
 
 @rpc("any_peer","call_local","reliable") func MeleeRequest(defender_body_id):
 	var attacker_id = multiplayer.get_remote_sender_id()
