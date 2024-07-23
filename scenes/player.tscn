@@ -4,7 +4,7 @@
 [ext_resource type="PackedScene" uid="uid://c0x2m3l5w8uld" path="res://scenes/coinshot.tscn" id="2_45mts"]
 [ext_resource type="PackedScene" uid="uid://dxhce60nws1jp" path="res://scenes/killzone.tscn" id="3_4qqox"]
 [ext_resource type="Texture2D" uid="uid://rxil6jiihb1g" path="res://assets/mistborn_idle_sprite.png" id="3_e4p2g"]
-[ext_resource type="Texture2D" uid="uid://cu4bqv7v1ifwm" path="res://mistborn_sprite_melee.png" id="4_q44fg"]
+[ext_resource type="Texture2D" uid="uid://cu4bqv7v1ifwm" path="res://assets/mistborn_sprite_melee.png" id="4_4m10x"]
 [ext_resource type="Texture2D" uid="uid://ca8jg3s4jkdk1" path="res://assets/mistborn_sprite_run.png" id="5_qhxwr"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_og6xw"]
@@ -28,39 +28,39 @@ atlas = ExtResource("3_e4p2g")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1wbc8"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(0, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xrobe"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(16, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6yve0"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(32, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_m322c"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(48, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5f428"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(64, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xtj5m"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(80, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_td3rg"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(96, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6j7ld"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(112, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_sksbe"]
-atlas = ExtResource("4_q44fg")
+atlas = ExtResource("4_4m10x")
 region = Rect2(128, 0, 16, 16)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_5vt6t"]
@@ -158,6 +158,12 @@ properties/1/replication_mode = 1
 properties/2/path = NodePath(".:syncDirection")
 properties/2/spawn = true
 properties/2/replication_mode = 1
+properties/3/path = NodePath("AnimatedSprite2D:animation")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+properties/4/path = NodePath("AnimatedSprite2D:flip_h")
+properties/4/spawn = true
+properties/4/replication_mode = 1
 
 [node name="player" type="CharacterBody2D" groups=["player"]]
 z_index = 5
