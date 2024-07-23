@@ -112,12 +112,12 @@ func _physics_process(delta):
 			syncDirection = -1
 			$killzone/CollisionShape2D2.position = Vector2(-melee_x_position, 0)
 		#play animations
-		if is_on_floor():
+		if is_on_floor() and can_attack:
 			if direction == 0:
 				animated_sprite.play("idle")
 			else:
 				animated_sprite.play("run")
-		else:
+		elif can_attack:
 			animated_sprite.play("jump")
 		#apply movement
 		if direction:
@@ -135,6 +135,7 @@ func _physics_process(delta):
 			$killzone.active = true
 			can_attack = false
 			$killzone.collision_detection()
+			animated_sprite.play("melee")
 			
 
 		move_and_slide()

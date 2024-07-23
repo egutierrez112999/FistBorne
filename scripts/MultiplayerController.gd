@@ -85,3 +85,5 @@ func _process(_delta):
 	for p in GameManager.players:
 		if GameManager.players[p].health <= 0:
 			EndGame.rpc()
+
+#yield(get_tree().create_timer(0.1),"timeout")
