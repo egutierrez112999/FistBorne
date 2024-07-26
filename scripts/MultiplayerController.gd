@@ -4,6 +4,7 @@ extends Control
 @export var Port = 9999
 var peer
 var scene
+var game_active = true
 
 func _ready():
 	multiplayer.peer_connected.connect(peer_connected)
@@ -17,6 +18,12 @@ func peer_connected(id):
 	
 #called on server and clients when a peer disconnects
 func peer_disconnected(id):
+	#for n in get_tree().root.get_children():
+		#n.queue_free()
+	GameManager.multiplayer_active = false
+	GameManager.players[id].player.queue_free()
+	GameManager.players.erase(id)
+	get_tree().change_scene_to_file("res://scenes/control.tscn")
 	print("Player Disconnected "+str(id))
 
 #called only from clients  client-> server
@@ -44,6 +51,7 @@ func connected_failed():
 			send_player_info.rpc(GameManager.players[i].name, i)
 
 func _on_host_button_down():
+	GameManager.multiplayer_active = true
 	peer = ENetMultiplayerPeer.new()
 	var error = peer.create_server(Port, 4)#4 player game. 
 	if error != OK:
@@ -58,6 +66,7 @@ func _on_host_button_down():
 
 
 func _on_join_button_down():
+	GameManager.multiplayer_active = true
 	peer = ENetMultiplayerPeer.new()
 	peer.create_client(Address, Port)
 	peer.get_host().compress(ENetConnection.COMPRESS_RANGE_CODER)
@@ -74,16 +83,20 @@ func _on_start_game_button_down():
 
 
 @rpc("any_peer","call_local") func EndGame():
-	#for i in get_tree().root.get_children():
-		#get_tree().root.remove_child(i)
-	get_tree().root.remove_child(scene)
-	get_tree().reload_current_scene()
-	multiplayer.disconnect_peer(1)
+	GameManager.multiplayer_active = false
+	DisconnectAllPeers.rpc()
+	
+@rpc("any_peer","call_local") func DisconnectAllPeers():
+	multiplayer.multiplayer_peer.close()
 		
+#@rpc("any_peer","call_local") func 
 
 func _process(_delta):
-	for p in GameManager.players:
-		if GameManager.players[p].health <= 0:
-			EndGame.rpc()
+	if game_active:
+		for p in GameManager.players:
+			if GameManager.players[p].health <= 0:
+				GameManager.multiplayer_active = false
+				game_active = false
+				EndGame.rpc()
 
-#yield(get_tree().create_timer(0.1),"timeout")
+#yield(get_tree().create_timer(0.1),"timeout"

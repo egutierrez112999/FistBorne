@@ -18,4 +18,3 @@ func _ready():
 		index +=1
 
 
-

@@ -1,7 +1,7 @@
 extends RichTextLabel
 
 func _process(_delta):
-	if GameManager.changeText:
+	if GameManager.multiplayer_active and GameManager.changeText:
 		UpdateGameData.rpc()
 
 func format_player_data():
