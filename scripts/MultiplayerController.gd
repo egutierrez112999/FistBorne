@@ -11,6 +11,7 @@ func _ready():
 	multiplayer.peer_disconnected.connect(peer_disconnected)
 	multiplayer.connected_to_server.connect(connected_to_server)
 	multiplayer.connection_failed.connect(connected_failed)
+	multiplayer.server_disconnected.connect(server_disconnected)
 
 #called on server and clients when a peer connects
 func peer_connected(id):
@@ -19,13 +20,24 @@ func peer_connected(id):
 #called on server and clients when a peer disconnects
 func peer_disconnected(id):
 	#for n in get_tree().root.get_children():
-		#n.queue_free()
-	GameManager.multiplayer_active = false
+		#n.queue_free()	
+	#GameManager.players[id].player.queue_free()
+	#GameManager.multiplayer_active = false
+	#GameManager.players = {}
 	GameManager.players[id].player.queue_free()
-	GameManager.players.erase(id)
-	get_tree().change_scene_to_file("res://scenes/control.tscn")
+	#GameManager.players.erase(id)
+	#get_tree().change_scene_to_file("res://scenes/control.tscn")
 	print("Player Disconnected "+str(id))
 
+func server_disconnected():
+	if multiplayer.get_unique_id():
+		GameManager.players[multiplayer.get_unique_id()].player.queue_free()
+		multiplayer.multiplayer_peer.close()
+	GameManager.multiplayer_active = false
+	GameManager.players = {}
+	get_tree().change_scene_to_file("res://scenes/control.tscn")
+	print("server disconnected")
+	
 #called only from clients  client-> server
 func connected_to_server():
 	print("Connected to Server!")
@@ -34,8 +46,7 @@ func connected_to_server():
 #called only from clients
 func connected_failed():
 	print("Couldn't Connect")
-	
-	
+
 @rpc("any_peer") func send_player_info(name, id):
 	if !GameManager.players.has(id):
 		GameManager.players[id] = {
@@ -82,12 +93,14 @@ func _on_start_game_button_down():
 	self.hide()
 
 
-@rpc("any_peer","call_local") func EndGame():
+@rpc("authority","call_local") func EndGame():
 	GameManager.multiplayer_active = false
-	DisconnectAllPeers.rpc()
-	
-@rpc("any_peer","call_local") func DisconnectAllPeers():
 	multiplayer.multiplayer_peer.close()
+	#scene = load("res://scenes/control.tscn").instantiate()
+	#get_tree().root.add_child(scene)
+	#GameManager.players = {}
+	#self.hide()
+
 		
 #@rpc("any_peer","call_local") func 
 
@@ -97,6 +110,6 @@ func _process(_delta):
 			if GameManager.players[p].health <= 0:
 				GameManager.multiplayer_active = false
 				game_active = false
-				EndGame.rpc()
+				EndGame.rpc_id(1)
 
 #yield(get_tree().create_timer(0.1),"timeout"

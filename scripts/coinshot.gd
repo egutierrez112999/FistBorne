@@ -8,13 +8,17 @@ var direction: Vector2
 var coin_owner_id
 
 func _ready():
-	$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())	
+	if GameManager.multiplayer_active:
+		$MultiplayerSynchronizer.set_multiplayer_authority(str(name).to_int())	
 	
 func _physics_process(delta):
-	position.x += (direction[0] * SPEED * delta)
+	if GameManager.multiplayer_active:
+		position.x += (direction[0] * SPEED * delta)
 
 func _on_body_entered(body):
-	RangedRequest.rpc_id(1, coin_owner_id, body.network_id)
+	if GameManager.multiplayer_active:
+		RangedRequest.rpc_id(1, coin_owner_id, body.network_id)
+		#self.queue_free()
 
 @rpc("any_peer","call_local","reliable") func RangedRequest(coin_owner_id, defender_body_id):
 	var attacker_id = coin_owner_id
