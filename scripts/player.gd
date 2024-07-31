@@ -40,7 +40,9 @@ func _physics_process(delta):
 				velocity.y += gravity * delta
 			# Handle jump.
 			if Input.is_action_just_pressed("burn_iron") and (GameManager.players[network_id].metal_reserves >= iron_cost):
+				#Subtract the metal cost for this action
 				GameManager.players[network_id].metal_reserves -= iron_cost
+				#Get the necessary data ffor the movement regardless of player screen size
 				var mouse_coords = get_viewport().get_mouse_position()
 				var window_size = get_viewport().get_window().size
 				#( src - src_min ) / ( src_max - src_min ) * ( res_max - res_min ) + res_min
@@ -69,7 +71,9 @@ func _physics_process(delta):
 					position.y = metal_movement_y
 					position.x = metal_movement_x
 			if Input.is_action_just_pressed("burn_steel") and (GameManager.players[network_id].metal_reserves >= steel_cost):
+				#Subtract the metal cost for this action
 				GameManager.players[network_id].metal_reserves -= steel_cost
+				#Get the necessary data ffor the movement regardless of player screen size
 				var mouse_coords = get_viewport().get_mouse_position()
 				var window_size = get_viewport().get_window().size
 				#( src - src_min ) / ( src_max - src_min ) * ( res_max - res_min ) + res_min
@@ -128,10 +132,12 @@ func _physics_process(delta):
 				
 			
 			if Input.is_action_just_pressed("ranged_attack") and (GameManager.players[network_id].metal_reserves >= coin_shot_cost):
+				#Remove the metal cost and call the SpawnBullet RPC
 				GameManager.players[network_id].metal_reserves -= coin_shot_cost
 				SpawnBullet.rpc()
 				
 			if Input.is_action_just_pressed("melee_attack") and can_attack:
+				#Start the timer for an attack and make all the necessary requests
 				$Timer.start()
 				$killzone.active = true
 				can_attack = false
@@ -145,6 +151,7 @@ func _physics_process(delta):
 		
 		
 @rpc("any_peer","call_local","unreliable") func SpawnBullet():
+	#Create the coin and shoot it in the direction the player character is facing
 	var coin = coin_shot.instantiate()
 	coin.direction = Vector2(syncDirection,0)
 	coin.coin_owner_id = multiplayer.get_remote_sender_id()

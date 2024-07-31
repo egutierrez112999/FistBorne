@@ -2,7 +2,10 @@ extends Area2D
 
 var active
 
+
+#Used as an improved version of checking for melee contact
 func collision_detection():
+	#check if the melee aread2d has overlap with anyother player collisionbodies
 	if has_overlapping_bodies() and active:
 		var body_list = get_overlapping_bodies()
 		#print(body_list)
@@ -16,6 +19,7 @@ func collision_detection():
 
 @rpc("any_peer","call_local","reliable") func MeleeRequest(defender_body_id):
 	var attacker_id = multiplayer.get_remote_sender_id()
+	#check to make sure a peer is not hitting themselves
 	if attacker_id != defender_body_id:
 		var attacker_pos = GameManager.players[attacker_id].player.global_position
 		var defender_pos = GameManager.players[defender_body_id].player.global_position
@@ -27,8 +31,10 @@ func collision_detection():
 			GameManager.players[attacker_id].score += 1
 			TakeDamage.rpc_id(0, defender_body_id)
 	GameManager.changeText = true
+	#Update player data for all peers
 	GameManager.players = GameManager.players
 		
 @rpc("any_peer","call_local") func TakeDamage(defender_id):
+		##set damage for them on all peers
 		GameManager.players[defender_id].health -= 30
 

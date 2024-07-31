@@ -88,6 +88,7 @@ func _on_start_game_button_down():
 	StartGame.rpc()
 	
 @rpc("any_peer","call_local") func StartGame():
+	#instantiate the game scene and add it to the tree
 	scene = load("res://scenes/game.tscn").instantiate()
 	get_tree().root.add_child(scene)
 	self.hide()
@@ -105,6 +106,7 @@ func _on_start_game_button_down():
 #@rpc("any_peer","call_local") func 
 
 func _process(_delta):
+	#This is a loop to check if the game is over
 	if game_active:
 		for p in GameManager.players:
 			if GameManager.players[p].health <= 0:
